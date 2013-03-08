@@ -30,7 +30,7 @@ public class ConexionBD {
         }
         if(motor.equalsIgnoreCase("dbf")){
             String url = "jdbc:dbf:/"+host;
-            System.out.println(url);
+            //System.out.println(url);
             Class.forName("com.hxtt.sql.dbf.DBFDriver").newInstance();
             Locale.setDefault(new Locale("Es"));
             c= DriverManager.getConnection(url, "", "");
