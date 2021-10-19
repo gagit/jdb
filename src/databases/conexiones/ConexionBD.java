@@ -20,25 +20,27 @@ public class ConexionBD {
                                         String host, String puerto, String bd,
                                             String usuario, String clave) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Connection c=null;
-        if(motor.equalsIgnoreCase("oracle")){
-            c = ConexionOracle.
-                    getConexionOracle(host,usuario,clave,puerto,bd);
+        switch (motor.toLowerCase()){
+            case "postgres":
+                c = databases.conexiones.ConexionPostgress.
+                        getConexion(host,bd,puerto,usuario,clave);
+                break;
+            case "oracle":
+                c = ConexionOracle.
+                        getConexionOracle(host,usuario,clave,puerto,bd);
+                break;
+            case "mysql":
+                c = databases.conexiones.ConexionMysql.
+                        getConexion(host,bd,usuario,clave);
+                break;
+            case "dbf":
+                String url = "jdbc:dbf:/"+host;
+                //System.out.println(url);
+                Class.forName("com.hxtt.sql.dbf.DBFDriver").newInstance();
+                Locale.setDefault(new Locale("Es"));
+                c= DriverManager.getConnection(url, "", "");
+                break;
         }
-        if(motor.equalsIgnoreCase("mysql")){
-            c = databases.conexiones.ConexionMysql.
-                    getConexion(host,bd,usuario,clave);
-        }
-        if(motor.equalsIgnoreCase("dbf")){
-            String url = "jdbc:dbf:/"+host;
-            //System.out.println(url);
-            Class.forName("com.hxtt.sql.dbf.DBFDriver").newInstance();
-            Locale.setDefault(new Locale("Es"));
-            c= DriverManager.getConnection(url, "", "");
-       }
-       if(motor.equalsIgnoreCase("postgress")){
-            c = databases.conexiones.ConexionPostgress.
-                    getConexion(host,bd,puerto,usuario,clave);
-       }
        return c;
     }
     
