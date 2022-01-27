@@ -35,8 +35,12 @@ public class ConexionBD {
             Locale.setDefault(new Locale("Es"));
             c= DriverManager.getConnection(url, "", "");
        }
-       if(motor.equalsIgnoreCase("postgress")){
+       if(motor.equalsIgnoreCase("postgres")){
             c = databases.conexiones.ConexionPostgress.
+                    getConexion(host,bd,puerto,usuario,clave);
+       }
+       if(motor.equalsIgnoreCase("sqlserver")){
+            c = databases.conexiones.ConexionSqlServer.
                     getConexion(host,bd,puerto,usuario,clave);
        }
        return c;

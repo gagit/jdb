@@ -12,14 +12,14 @@ import java.sql.Connection;
  */
 public class DBF {
     
-    private static Connection c;
-    
-    public static void iniciar(Connection c) {
-        DBF.c = c;
-    }
-    
-    public static void romper() {
-        ((com.hxtt.sql.be) c).bc().d = false;
-    }
+//    private static Connection c;
+//
+//    public static void iniciar(Connection c) {
+//        DBF.c = c;
+//    }
+//
+//    public static void romper() {
+//        ((com.hxtt.sql.be) c).bc().d = false;
+//    }
     
 }

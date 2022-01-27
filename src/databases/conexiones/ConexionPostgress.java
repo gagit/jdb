@@ -19,13 +19,11 @@ public class ConexionPostgress extends ConexionBD{
 
     public static Connection getConexion(String host,
         String bd,String usuario, String clave) throws ClassNotFoundException, SQLException {
-        Class.forName(ConexionPostgress.nombreDriver);
         String url ="jdbc:postgresql://"+host+":5432/"+bd;
         return DriverManager.getConnection(url,usuario,clave);
     }
     public static Connection getConexion(String host,
             String bd,String puerto,String usuario, String clave) throws ClassNotFoundException, SQLException {
-        Class.forName(ConexionPostgress.nombreDriver);
         String url="jdbc:postgresql://"+host+":"+puerto+"/"+bd;
         
         return DriverManager.getConnection(url,usuario,clave);
