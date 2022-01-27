@@ -53,7 +53,7 @@ public class FactoriaConexionesDB {
     
     private static boolean establecerConexion(String nombreConec) throws SQLException {
         boolean ok=false;
-        HashMap<String,String[]> params_con=new HashMap<String,String[]>(64);
+        HashMap<String,String[]> parameters_conections=new HashMap<String,String[]>(64);
         Properties prop = new Properties();
         try {
             prop.load(new FileInputStream("bds.properties"));
@@ -63,15 +63,15 @@ public class FactoriaConexionesDB {
                 String p=propiedades.nextElement();
                 if((p.indexOf("nombre_conexion_")!=-1)){
                     p.substring(16);
-                    String[] para_conex=new String[7];
-                    para_conex[0]=prop.getProperty("motor_"+p.substring(16));
-                    para_conex[1]=prop.getProperty("driver_conexion_"+p.substring(16));
-                    para_conex[2]=prop.getProperty("host_conexion_"+p.substring(16));
-                    para_conex[3]=prop.getProperty("puerto_conexion_"+p.substring(16));
-                    para_conex[4]=prop.getProperty("nombre_bd_conexion_"+p.substring(16));
-                    para_conex[5]=prop.getProperty("usuario_conexion_"+p.substring(16));
-                    para_conex[6]=prop.getProperty("clave_conexion_"+p.substring(16));
-                    params_con.put(prop.getProperty(p), para_conex);
+                    String[] conection_parameters_temp=new String[7];
+                    conection_parameters_temp[0]=prop.getProperty("motor_"+p.substring(16));
+                    conection_parameters_temp[1]=prop.getProperty("driver_conexion_"+p.substring(16));
+                    conection_parameters_temp[2]=prop.getProperty("host_conexion_"+p.substring(16));
+                    conection_parameters_temp[3]=prop.getProperty("puerto_conexion_"+p.substring(16));
+                    conection_parameters_temp[4]=prop.getProperty("nombre_bd_conexion_"+p.substring(16));
+                    conection_parameters_temp[5]=prop.getProperty("usuario_conexion_"+p.substring(16));
+                    conection_parameters_temp[6]=prop.getProperty("clave_conexion_"+p.substring(16));
+                    parameters_conections.put(prop.getProperty(p), conection_parameters_temp);
                 }
             }
             
@@ -80,7 +80,7 @@ public class FactoriaConexionesDB {
             e.printStackTrace();
         }
         try {
-            String[] par=params_con.get(nombreConec);
+            String[] par=parameters_conections.get(nombreConec);
             Connection con = ConexionBD.crearConexion(
                     par[0],par[1],par[2],par[3],par[4],par[5],par[6]);
             if( con != null){

@@ -1,3 +1,4 @@
 /nbproject/
-out
 .idea
+build.xml
+out
